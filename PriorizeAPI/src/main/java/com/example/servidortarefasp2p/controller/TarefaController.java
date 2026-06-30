@@ -9,7 +9,7 @@ public class TarefaController {
     @MessageMapping("/atualizar-tarefa")
     @SendTo ("/topic/tarefas")
 
-    public String sincromizarTarefa(String tarefaJosn){
+    public String sincronizarTarefa(String tarefaJosn){
 
         System.out.println("Nova Atualização recebida na rede: " + tarefaJosn);
         return tarefaJosn;
