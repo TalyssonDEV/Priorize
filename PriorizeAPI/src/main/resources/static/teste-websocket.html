@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Teste WebSocket Priorize</title>
+</head>
+
+<body>
+  <h2>Teste WebSocket Priorize</h2>
+
+  <button onclick="conectar()">Conectar</button>
+  <button onclick="enviar()">Enviar tarefa</button>
+
+  <pre id="log"></pre>
+
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+
+  <script>
+    let client;
+
+    function log(msg) {
+      document.getElementById("log").textContent += msg + "\n";
+    }
+
+    function conectar() {
+      client = new StompJs.Client({
+        brokerURL: "ws://localhost:8080/ws-tarefas",
+        debug: (str) => log(str),
+        reconnectDelay: 5000,
+
+        onConnect: () => {
+          log("Conectado com sucesso!");
+
+          client.subscribe("/topic/tarefas", (message) => {
+            log("Mensagem recebida: " + message.body);
+          });
+        },
+
+        onWebSocketError: (error) => {
+          log("Erro WebSocket: " + error);
+        },
+
+        onStompError: (frame) => {
+          log("Erro STOMP: " + frame.headers["message"]);
+          log("Detalhes: " + frame.body);
+        }
+      });
+
+      client.activate();
+    }
+
+    function enviar() {
+      const tarefa = {
+        id: 1,
+        titulo: "Teste da PR",
+        descricao: "Mensagem enviada via WebSocket",
+        concluida: false
+      };
+
+      client.publish({
+        destination: "/app/atualizar-tarefa",
+        body: JSON.stringify(tarefa)
+      });
+
+      log("Mensagem enviada: " + JSON.stringify(tarefa));
+    }
+  </script>
+</body>
+
+</html>

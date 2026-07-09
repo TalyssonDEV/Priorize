@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:priorize/viewmodel/tarefa_viewmodel.dart';
 import 'package:priorize/viewmodel/categoria_viewmodel.dart';
+import 'package:priorize/view/screens/websocket_teste_screen.dart';
 import '../widgets/tarefa_card.dart';
 import '../widgets/adicionar_tarefa_dialog.dart';
 import '../widgets/filtro_prioridade_sheet.dart';
@@ -22,6 +23,16 @@ class HomeScreen extends StatelessWidget {
         actions: [
           // Botão de filtro de prioridade
           IconButton(
+            icon: const Icon(Icons.wifi),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const WebSocketTesteScreen()),
+              );
+            },
+            tooltip: 'Teste WebSocket',
+          ),
+          IconButton(
             icon: const Icon(Icons.filter_list),
             onPressed: () => _mostrarFiltroPrioridade(context),
             tooltip: 'Filtrar por prioridade',
@@ -38,14 +49,12 @@ class HomeScreen extends StatelessWidget {
         children: [
           // Barra de progresso
           _buildBarraProgresso(),
-          
+
           // Chips de filtro por categoria
           _buildFiltrosCategorias(),
-          
+
           // Lista de tarefas
-          Expanded(
-            child: _buildListaTarefas(),
-          ),
+          Expanded(child: _buildListaTarefas()),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -123,7 +132,8 @@ class HomeScreen extends StatelessWidget {
             itemCount: categoriaVM.categorias.length,
             itemBuilder: (context, index) {
               final categoria = categoriaVM.categorias[index];
-              final isSelected = tarefaVM.categoriaIdSelecionada == categoria.id;
+              final isSelected =
+                  tarefaVM.categoriaIdSelecionada == categoria.id;
 
               return Padding(
                 padding: const EdgeInsets.only(right: 8),
@@ -141,7 +151,8 @@ class HomeScreen extends StatelessWidget {
                   checkmarkColor: Colors.blue,
                   labelStyle: TextStyle(
                     color: isSelected ? Colors.blue : Colors.grey[700],
-                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                    fontWeight:
+                        isSelected ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
               );
@@ -204,10 +215,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   'Adicione uma nova tarefa para começar',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[500],
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.grey[500]),
                 ),
               ],
             ),

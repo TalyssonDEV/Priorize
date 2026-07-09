@@ -13,6 +13,7 @@ dependencies:
   provider: ^6.1.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  stomp_dart_client: ^2.1.0
 
 dev_dependencies:
   flutter_test:
