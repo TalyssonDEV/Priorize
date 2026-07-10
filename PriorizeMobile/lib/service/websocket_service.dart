@@ -14,6 +14,7 @@ class WebSocketService {
 
   void conectar({
     required String ipServidor,
+    String destino = '/topic/tarefas',
     void Function()? aoConectar,
     void Function(dynamic erro)? aoErro,
   }) {
@@ -24,7 +25,7 @@ class WebSocketService {
         url: url,
         onConnect: (StompFrame frame) {
           _stompClient?.subscribe(
-            destination: '/topic/tarefas',
+            destination: destino,
             callback: (StompFrame frame) {
               final mensagem = frame.body;
 

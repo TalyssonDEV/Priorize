@@ -34,7 +34,9 @@ class TarefaViewModel extends ChangeNotifier {
   int get tarefasNaoConcuidas => _service.filtrarTarefaPendente(tarefas).length;
   double get progressoTarefas => _service.calcularProgresso(tarefas).toDouble();
 
-  TarefaViewModel(this._repository, this._service);
+  TarefaViewModel(this._repository, this._service) {
+    carregarTarefas();
+  }
 
   void setCategoriaViewModel(CategoriaViewModel categoriaViewModel) {
     _categoriaViewModel = categoriaViewModel;
