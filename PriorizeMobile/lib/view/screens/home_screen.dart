@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:priorize/viewmodel/tarefa_viewmodel.dart';
 import 'package:priorize/viewmodel/categoria_viewmodel.dart';
 import 'package:priorize/view/screens/websocket_teste_screen.dart';
+import 'package:priorize/view/screens/shared_rooms_screen.dart';
 import '../widgets/tarefa_card.dart';
 import '../widgets/adicionar_tarefa_dialog.dart';
 import '../widgets/filtro_prioridade_sheet.dart';
@@ -21,6 +22,11 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.folder_shared),
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SharedRoomsScreen())),
+            tooltip: 'Salas P2P',
+          ),
           // Botão de filtro de prioridade
           IconButton(
             icon: const Icon(Icons.wifi),
