@@ -228,6 +228,14 @@ class TarefaViewModel extends ChangeNotifier {
     return _service.contarTarefaPorCategoria(_tarefas, idCategoria);
   }
 
+  int contarTarefasPorPrioridade(String prioridade) {
+    if (_categoriaViewModel == null) return 0;
+    return _tarefas.where((tarefa) {
+      final categoria = _categoriaViewModel!.obterCategoriaPorId(tarefa.idCategoria);
+      return categoria?.nivelPrioridade == prioridade;
+    }).length;
+  }
+
   List<TarefaModel> obterTarefasPendente() {
     return _service.filtrarTarefaPendente(tarefas);
   }
