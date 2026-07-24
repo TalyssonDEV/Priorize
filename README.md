@@ -42,7 +42,7 @@ Este software resolve o desafio comum em ambientes corporativos onde o acesso Wi
 
 O **Priorize** utiliza uma arquitetura híbrida projetada para superar restrições de rede.
 
-Visualize a interface principal do aplicativo na imagem_94cdc7.png, onde é possível gerenciar tarefas e acessar as salas de chat corporativas.
+Visualize a interface principal do aplicativo, onde é possível gerenciar tarefas e acessar as salas de chat corporativas.
 
 ### Como Funciona:
 
